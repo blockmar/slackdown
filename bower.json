@@ -1,0 +1,12 @@
+{
+  "name": "Slackdown",
+  "version": "0.0.1",
+  "authors": [
+    "Anders Blockmar <blockmar@gmail.com>"
+  ],
+  "description": "Parser for slack.com formatted texts",
+  "private": true,
+  "dependencies": {
+     "qunit": "latest"
+  }
+}

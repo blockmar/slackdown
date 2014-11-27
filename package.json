@@ -1,0 +1,12 @@
+{
+  "name": "Stockdown",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+  },
+  "devDependencies": {
+      "grunt": "*",
+      "grunt-contrib-watch": "*",
+      "grunt-contrib-uglify": "*"
+  }
+}
