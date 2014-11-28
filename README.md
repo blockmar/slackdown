@@ -33,6 +33,9 @@ The minified version of Slackdown is created by a [Grunt](http://gruntjs.com/)-t
 
 ## Changelog
 
+### v 0.0.2
+Support for bold, italic and fixed width.
+
 ### v 0.0.1
 Initial version. Support for Users, Channels, Commands and links.
 
