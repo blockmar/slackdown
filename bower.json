@@ -1,10 +1,10 @@
 {
   "name": "Slackdown",
-  "version": "0.0.3",
   "main": "dist/slackdown.min.js",
   "authors": [
     "Anders Blockmar <blockmar@gmail.com>"
   ],
+  "license": "MIT",
   "ignore": [
     ".gitignore"
   ],
