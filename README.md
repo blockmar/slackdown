@@ -31,10 +31,10 @@ Tests are runmed using [QUnit](http://qunitjs.com/). Open test/index.html in you
 
 The minified version of Slackdown is created by a [Grunt](http://gruntjs.com/)-task using uglify.
 
-## Changelog
+## Changelog (highlights)
 
-### v 0.0.3
-Fixed typo in script filename
+### v 0.0.4
+Fixed bug with random underscores/asterisks breaking output
 
 ### v 0.0.2
 Support for bold, italic and fixed width.
@@ -49,7 +49,8 @@ Initial version. Support for Users, Channels, Commands and links.
 * Add better usage examples to readme
 * Add support for requirejs (AMD)
 * Support nodejs
+* Refactoring
 
 ## Known bugs
 
-* If the text includes underscores/asterisks not a part of styling the output get unexpected italic/bold.
+* None right now
