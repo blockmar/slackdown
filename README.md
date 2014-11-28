@@ -14,7 +14,7 @@ Formatting-rules are found here https://api.slack.com/docs/formatting
 Including:
 
 ```html
-<script src="stockdown.min.js"></script>
+<script src="slackdown.min.js"></script>
 ```
 
 Parsing text:
@@ -32,6 +32,9 @@ Tests are runmed using [QUnit](http://qunitjs.com/). Open test/index.html in you
 The minified version of Slackdown is created by a [Grunt](http://gruntjs.com/)-task using uglify.
 
 ## Changelog
+
+### v 0.0.3
+Fixed typo in script filename
 
 ### v 0.0.2
 Support for bold, italic and fixed width.

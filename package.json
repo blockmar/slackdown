@@ -1,6 +1,6 @@
 {
-  "name": "Stockdown",
-  "version": "0.0.2",
+  "name": "Slackdown",
+  "version": "0.0.3",
   "private": true,
   "dependencies": {
   },

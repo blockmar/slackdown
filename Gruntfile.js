@@ -9,8 +9,8 @@ module.exports = function(grunt) {
       },
       dist: {
         files: {
-          'dist/stockdown.min.js': [
-              'src/stockdown.js'
+          'dist/slackdown.min.js': [
+              'src/slackdown.js'
           ]
         }
       }
