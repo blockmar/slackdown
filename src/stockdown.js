@@ -34,13 +34,13 @@ window.slackdown = (function () {
 
         switch(action) {
             case COMMAND:
-                return tag("span", { class: "slack_cmd" }, payloads(match, 2)[0]);
+                return tag("span", { class: "slack-cmd" }, payloads(match, 2)[0]);
             case CHANNEL:
                 p = payloads(match, 3);
-                return tag("span", { class: "slack_channel"}, (p.length == 1 ? p[0] : p[1]));
+                return tag("span", { class: "slack-channel"}, (p.length == 1 ? p[0] : p[1]));
             case USER:
                 p = payloads(match, 3);
-                return tag("span", { class: "slack_user" }, (p.length == 1 ? p[0] : p[1]));
+                return tag("span", { class: "slack-user" }, (p.length == 1 ? p[0] : p[1]));
             default:
                 p = payloads(match, 1);
                 return tag("a", { href: p[0] }, (p.length == 1 ? p[0] : p[1]));
@@ -51,11 +51,21 @@ window.slackdown = (function () {
         return tag("strong", payloads(match, 1));
     };
 
+    var matchItalic = function(match) {
+        return tag("em", payloads(match, 1));
+    };
+
+    var matchFixed = function(match) {
+        return tag("code", payloads(match, 1));
+    };
+
     var publicParse = function (text) {
 
         var patterns = [
             { p: /<(.*?)>/g, cb: matchTag },
-            { p: /\*(.*?)\*/g, cb: matchBold }
+            { p: /\*([^\*]*?)\*/g, cb: matchBold },
+            { p: /_([^_]*?)_/g, cb: matchItalic },
+            { p: /`([^`]*?)`/g, cb: matchFixed }
         ];
 
         for(var p = 0; p < patterns.length; p++) {
@@ -66,7 +76,7 @@ window.slackdown = (function () {
             if(matches) {
                 for (var i = 0; i < matches.length; i++) {
                     var match = matches[i],
-                        replace = pattern.cb(match);
+                        replace = pattern.cb(match, text);
 
                     if (replace) {
                         text = text.replace(match, replace);

@@ -39,7 +39,11 @@ Initial version. Support for Users, Channels, Commands and links.
 ## TODO
 
 * Add support for Emojis
-* Add support for bold, italic etc from here https://slack.zendesk.com/hc/en-us/articles/202288908-How-can-I-add-formatting-to-my-messages-
+* Add support for -bold-, -italic- etc from here https://slack.zendesk.com/hc/en-us/articles/202288908-How-can-I-add-formatting-to-my-messages-
 * Add better usage examples to readme
 * Add support for requirejs (AMD)
 * Support nodejs
+
+## Known bugs
+
+* If the text includes underscores/asterisks not a part of styling the output get unexpected italic/bold.
