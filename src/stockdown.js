@@ -4,68 +4,81 @@ window.slackdown = (function () {
         CHANNEL = "#",
         USER = "@";
 
-    var tagRegexp = /<(.*?)>/g;
-
-    var cmdPayload = function(tag) {
+    var payloads = function(tag, start) {
         var length = tag.length;
-        return tag.substr(2, length - 3);
-    };
-
-    var channelUserPayloads = function(tag) {
-        var length = tag.length;
-        return pipeSplit(tag.substr(3, length - 4));
+        return pipeSplit(tag.substr(start, length - (start + 1)));
     };
 
     var pipeSplit = function(payload) {
         return payload.split('|');
     };
 
-    var tagClass = function(tag, css, payload) {
-        return "<" + tag + ' class="' + css + '">' + payload + "</" + tag + ">";
+    var tag = function(tag, attributes, payload) {
+        if(!payload) {
+            payload = attributes;
+            attributes = {};
+        }
+
+        var html = "<".concat(tag);
+        for (var attribute in attributes) {
+            if (attributes.hasOwnProperty(attribute)) {
+                html = html.concat(' ', attribute, '="', attributes[attribute], '"');
+            }
+        }
+        return html.concat('>', payload, '</', tag, '>');
     };
 
-    var aHref = function(match) {
-        var length = match.length,
-            p = pipeSplit(match.substr(1, length - 2));
-        return '<a href="' + p[0] + '">' + (p.length == 1 ? p[0] : p[1]) + '</a>';
+    var matchTag = function(match) {
+        var action = match.substr(1,1),
+            p;
+
+        switch(action) {
+            case COMMAND:
+                return tag("span", { class: "slack_cmd" }, payloads(match, 2)[0]);
+            case CHANNEL:
+                p = payloads(match, 3);
+                return tag("span", { class: "slack_channel"}, (p.length == 1 ? p[0] : p[1]));
+            case USER:
+                p = payloads(match, 3);
+                return tag("span", { class: "slack_user" }, (p.length == 1 ? p[0] : p[1]));
+            default:
+                p = payloads(match, 1);
+                return tag("a", { href: p[0] }, (p.length == 1 ? p[0] : p[1]));
+        }
     };
 
-    var slackdown = {
-        parse: function (text) {
+    var matchBold = function(match) {
+        return tag("strong", payloads(match, 1));
+    };
 
-            var matches = text.match(tagRegexp);
+    var publicParse = function (text) {
+
+        var patterns = [
+            { p: /<(.*?)>/g, cb: matchTag },
+            { p: /\*(.*?)\*/g, cb: matchBold }
+        ];
+
+        for(var p = 0; p < patterns.length; p++) {
+
+            var pattern = patterns[p];
+            var matches = text.match(pattern.p);
 
             if(matches) {
-                for(var i = 0; i < matches.length; i++) {
-                    var replace,
-                        match = matches[i],
-                        action = match.substr(1,1);
+                for (var i = 0; i < matches.length; i++) {
+                    var match = matches[i],
+                        replace = pattern.cb(match);
 
-                    switch(action) {
-                        case COMMAND:
-                            replace = tagClass("span", "slack_cmd", cmdPayload(match));
-                            break;
-                        case CHANNEL:
-                            var p = channelUserPayloads(match);
-                            replace = tagClass("span", "slack_channel", (p.length == 1 ? p[0] : p[1]));
-                            break;
-                        case USER:
-                            var p = channelUserPayloads(match);
-                            replace = tagClass("span", "slack_user", (p.length == 1 ? p[0] : p[1]));
-                            break;
-                        default:
-                            replace = aHref(match);
-                    }
-
-                    if(replace) {
+                    if (replace) {
                         text = text.replace(match, replace);
                     }
                 }
             }
-
-            return text;
         }
+
+        return text;
     };
 
-    return slackdown;
+    return {
+        parse: publicParse
+    };
 }());

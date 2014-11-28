@@ -32,3 +32,8 @@ QUnit.test("Links with NO text are parsed", function( assert ) {
     var expected = 'Click <a href="http://slack.com/">http://slack.com/</a>';
     assert.ok(slackdown.parse('Click <http://slack.com/>') == expected );
 });
+
+QUnit.test("Bold texts are parsed", function( assert ) {
+    var expected = 'The third <strong>word</strong> is bold';
+    assert.ok(slackdown.parse('The third *word* is bold') == expected );
+});
