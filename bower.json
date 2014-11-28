@@ -1,12 +1,17 @@
 {
   "name": "Slackdown",
   "version": "0.0.2",
+  "main": "dist/slackdown.min.js",
   "authors": [
     "Anders Blockmar <blockmar@gmail.com>"
   ],
-  "description": "Parser for slack.com formatted texts",
-  "private": true,
+  "ignore": [
+    ".gitignore"
+  ],
+  "description": "Simple parser for slack.com formatted texts",
   "dependencies": {
+  },
+  "devDependencies": {
      "qunit": "latest"
   }
 }
