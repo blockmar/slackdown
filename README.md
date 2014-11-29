@@ -2,22 +2,48 @@
 
 Slackdown is a simple javascript parser for translating messages from the slack.com API into html.
 
+Basic formatting like bold, italic, underscore, fixed width and slack.com ```<>``` tags is supported. See TODO for unsupported formatting.
+
 The parser is intended to be used when you want to display messages from slack.com on an html page. The parser
-can not translate message from html to slack format. The script is stand alone and does not use jQuery or any other frameworks when distributed.
+can not translate message from html to slack format. The script is stand alone and does not use jQuery or any other frameworks (except for testing).
 
 Formatting-rules are found here https://api.slack.com/docs/formatting
 
 ## Usage
 
-### In browser
+### Including
 
-Including:
+#### In Browser:
 
 ```html
 <script src="slackdown.min.js"></script>
 ```
 
-Parsing text:
+#### With Require.js:
+
+```javascript
+define(['slackdown'], function(slackdown) {
+    //Your code
+});
+```
+
+#### With Node.js
+
+```javascript
+var slackdown = require('slackdown');
+```
+
+Slackdown is not published as a npm package. Include by github reference.
+
+```json
+{
+  "dependencies": {
+    "slackdown": "blockmr/slackdown"
+  }
+}
+```
+
+### Parsing text
 
 ```javascript
 var html = slackdown.parse("This is a text from <http://slack.com|Slack>");
@@ -31,24 +57,10 @@ Tests are runmed using [QUnit](http://qunitjs.com/). Open test/index.html in you
 
 The minified version of Slackdown is created by a [Grunt](http://gruntjs.com/)-task using uglify.
 
-## Changelog (highlights)
-
-### v 0.0.4
-Fixed bug with random underscores/asterisks breaking output
-
-### v 0.0.2
-Support for bold, italic and fixed width.
-
-### v 0.0.1
-Initial version. Support for Users, Channels, Commands and links.
-
 ## TODO
 
 * Add support for Emojis
 * Add support for more styling from https://slack.zendesk.com/hc/en-us/articles/202288908-How-can-I-add-formatting-to-my-messages-
-* Add better usage examples to readme
-* Add support for requirejs (AMD)
-* Support nodejs
 * Refactoring
 
 ## Known bugs

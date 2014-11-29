@@ -12,6 +12,8 @@
   "dependencies": {
   },
   "devDependencies": {
-     "qunit": "latest"
+     "qunit": "latest",
+     "requirejs": "latest",
+     "requirejs-text": "latest"
   }
 }

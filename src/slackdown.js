@@ -1,8 +1,13 @@
-window.slackdown = (function () {
-
-    var COMMAND = "!",
-        CHANNEL = "#",
-        USER = "@";
+/*! https://github.com/blockmar/slackdown by @blockmar | MIT license */
+;(function (root, factory) {
+    if (typeof define === 'function' && define.amd) {
+        define([], factory);
+    } else if (typeof exports === 'object') {
+        module.exports = factory();
+    } else {
+        root.slackdown = factory();
+    }
+}(this, function () {
 
     var payloads = function(tag, start) {
         if(!start) {
@@ -36,12 +41,12 @@ window.slackdown = (function () {
             p;
 
         switch(action) {
-            case COMMAND:
+            case "!":
                 return tag("span", { class: "slack-cmd" }, payloads(match[1], 1)[0]);
-            case CHANNEL:
+            case "#":
                 p = payloads(match[1], 2);
                 return tag("span", { class: "slack-channel"}, (p.length == 1 ? p[0] : p[1]));
-            case USER:
+            case "@":
                 p = payloads(match[1], 2);
                 return tag("span", { class: "slack-user" }, (p.length == 1 ? p[0] : p[1]));
             default:
@@ -88,24 +93,26 @@ window.slackdown = (function () {
 
     var publicParse = function (text) {
 
-        var patterns = [
-            { p: /<(.*?)>/g, cb: matchTag },
-            { p: /\*([^\*]*?)\*/g, cb: matchBold },
-            { p: /_([^_]*?)_/g, cb: matchItalic },
-            { p: /`([^`]*?)`/g, cb: matchFixed }
-        ];
+        if(typeof text === 'string') {
+            var patterns = [
+                {p: /<(.*?)>/g, cb: matchTag},
+                {p: /\*([^\*]*?)\*/g, cb: matchBold},
+                {p: /_([^_]*?)_/g, cb: matchItalic},
+                {p: /`([^`]*?)`/g, cb: matchFixed}
+            ];
 
-        for(var p = 0; p < patterns.length; p++) {
+            for (var p = 0; p < patterns.length; p++) {
 
-            var pattern = patterns[p],
-                original = text,
-                result;
+                var pattern = patterns[p],
+                    original = text,
+                    result;
 
-            while ((result = pattern.p.exec(original)) !== null) {
-                var replace = pattern.cb(result);
+                while ((result = pattern.p.exec(original)) !== null) {
+                    var replace = pattern.cb(result);
 
-                if (replace) {
-                    text = text.replace(result[0], replace);
+                    if (replace) {
+                        text = text.replace(result[0], replace);
+                    }
                 }
             }
         }
@@ -116,4 +123,5 @@ window.slackdown = (function () {
     return {
         parse: publicParse
     };
-}());
+
+}));

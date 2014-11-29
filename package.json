@@ -1,7 +1,22 @@
 {
   "name": "Slackdown",
-  "version": "0.0.4",
-  "private": true,
+  "version": "0.1.0",
+  "description": "A javascript message parser for the slack.com api",
+  "keywords": "slack.com",
+  "homepage": "https://github.com/blockmar/slackdown",
+  "license" : "MIT",
+  "author": {
+    "name": "Anders Blockmar",
+    "email": "npm@blockmar.com",
+    "url": "http://andersblockmar.com/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/blockmar/slackdown.git"
+  },
+  "bugs": {
+    "url": "https://github.com/blockmar/slackdown/issues"
+  },
   "dependencies": {
   },
   "devDependencies": {

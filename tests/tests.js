@@ -64,3 +64,9 @@ QUnit.test("Method names with underscore are not parsed", function( assert ) {
     var expected = 'was created for method __48-[BIViewController _setupBasicViewModelBindings]_block_invoke123.';
     assert.equal(slackdown.parse('was created for method __48-[BIViewController _setupBasicViewModelBindings]_block_invoke123.'), expected);
 });
+
+QUnit.test("If input is not a String return it unchanged", function( assert ) {
+    var json = { one: "one", two: { three: 3, four: 4 }};
+    assert.deepEqual(slackdown.parse(json), json);
+    assert.equal(slackdown.parse(null), null);
+});
