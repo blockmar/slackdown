@@ -38,7 +38,7 @@ Slackdown is not published as a npm package. Include by github reference.
 ```json
 {
   "dependencies": {
-    "slackdown": "blockmr/slackdown"
+    "slackdown": "blockmar/slackdown"
   }
 }
 ```
