@@ -2,7 +2,7 @@
 
 Slackdown is a simple javascript parser for translating messages from the slack.com API into html.
 
-Basic formatting like bold, italic, underscore, fixed width and slack.com ```<>``` tags is supported. See TODO for unsupported formatting.
+Basic formatting like bold, italic, underscore, fixed width and slack.com ```<>``` tags are supported. See TODO for unsupported formatting.
 
 The parser is intended to be used when you want to display messages from slack.com on an html page. The parser
 can not translate message from html to slack format. The script is stand alone and does not use jQuery or any other frameworks (except for testing).
