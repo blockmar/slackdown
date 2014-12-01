@@ -10,6 +10,7 @@
     "email": "npm@blockmar.com",
     "url": "http://andersblockmar.com/"
   },
+  "main": "src/slackdown.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/blockmar/slackdown.git"
