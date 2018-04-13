@@ -55,6 +55,17 @@ QUnit.test("Styling in start and end of texts are parsed", function( assert ) {
     assert.equal(slackdown.parse('*asterisks* for bold'), '<strong>asterisks</strong> for bold');
 });
 
+QUnit.test("Styling before punctuation are correctly parsed", function( assert ) {
+    assert.equal(slackdown.parse('Hey *John*, how are you?'), 'Hey <strong>John</strong>, how are you?');
+    assert.equal(slackdown.parse('Hey _John_, how are you?'), 'Hey <em>John</em>, how are you?');
+    assert.equal(slackdown.parse('Hey <@U12345|John>, how are you?'), 'Hey <span class=\"slack-user\">John</span>, how are you?');
+});
+
+QUnit.test("Text with duplicated styling are not parsed", function( assert ) {
+    assert.equal(slackdown.parse('Hey **John**, how are you?'), 'Hey **John**, how are you?');
+    assert.equal(slackdown.parse('Hey __John__, how are you?'), 'Hey __John__, how are you?');
+});
+
 QUnit.test("Random underscores in texts are not parsed as italic", function( assert ) {
     var expected = 'This text _ has some_underscores';
     assert.equal(slackdown.parse('This text _ has some_underscores'), expected);
