@@ -13,7 +13,8 @@
         RE_TAG = new RegExp('<(.+?)>', 'g'),
         RE_BOLD = new RegExp('\\*([^\\*]+?)\\*', 'g'),
         RE_ITALIC = new RegExp('_([^_]+?)_', 'g'),
-        RE_FIXED = new RegExp('`([^`]+?)`', 'g');
+        RE_FIXED = new RegExp('`([^`]+?)`', 'g'),
+        RE_MULTILINE = new RegExp('```([^`]+?)```', 'g');
 
     var payloads = function(tag, start) {
         if(!start) {
@@ -73,6 +74,10 @@
         return safeMatch(match, tag("code", payloads(match[1])));
     };
 
+    var matchMultiline = function(match) {
+        return safeMatch(match, tag("pre", payloads(match[1])));
+    };
+
     var notAlphanumeric = function(input) {
         return !RE_ALPHANUMERIC.test(input);
     };
@@ -108,7 +113,8 @@
                 {p: RE_TAG, cb: matchTag},
                 {p: RE_BOLD, cb: matchBold},
                 {p: RE_ITALIC, cb: matchItalic},
-                {p: RE_FIXED, cb: matchFixed}
+                {p: RE_FIXED, cb: matchFixed},
+                {p: RE_MULTILINE, cb: matchMultiline}
             ];
 
             for (var p = 0; p < patterns.length; p++) {
