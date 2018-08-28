@@ -113,8 +113,8 @@
                 {p: RE_TAG, cb: matchTag},
                 {p: RE_BOLD, cb: matchBold},
                 {p: RE_ITALIC, cb: matchItalic},
-                {p: RE_FIXED, cb: matchFixed},
                 {p: RE_MULTILINE, cb: matchMultiline}
+                {p: RE_FIXED, cb: matchFixed},
             ];
 
             for (var p = 0; p < patterns.length; p++) {
