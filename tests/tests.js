@@ -48,6 +48,11 @@ QUnit.test("Inline texts are parsed", function( assert ) {
     assert.equal(slackdown.parse('Surround text with `single backticks` for inline fixed-width text'), expected);
 });
 
+QUnit.test("Multiline texts are parsed", function( assert ) {
+    var expected = 'Surround text with <pre>triple backticks</pre> for multiline text';
+    assert.equal(slackdown.parse('Surround text with ```triple backticks``` for multiline text'), expected);
+});
+
 QUnit.test("Styling in start and end of texts are parsed", function( assert ) {
     assert.equal(slackdown.parse('_underscores_ for italics'), '<em>underscores</em> for italics');
     assert.equal(slackdown.parse('underscores for _italics_'), 'underscores for <em>italics</em>');
